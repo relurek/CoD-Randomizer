@@ -11,8 +11,9 @@ public:
 		: offset(offsetIn), ids(idIn), locs(locIn) {}
 
 	void write(std::fstream fs);
-private:
-	uint32_t offset;
+
 	std::vector<uint16_t> ids;
 	std::vector<EnemyLocation> locs;
+private:
+	uint32_t offset;
 };

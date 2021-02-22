@@ -17,7 +17,7 @@ public:
 	uint8_t enemyIndex;		//Index in Encounter ID list
 	uint16_t range;			//Involving spawn distance
 	uint16_t resp;			//Involving respawning somehow
-
+	
 	// Unknown Values
 	uint16_t u1;
 	uint16_t u2;

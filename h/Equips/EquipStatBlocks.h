@@ -31,7 +31,7 @@ using EquipStatSet = std::vector<std::pair<EquipStatBlock, WeaponStatAdds>>;
 class EquipStatBlockOperations
 {
 public:
-	////// StatBlock Handlers //////
+	/// StatBlock Handlers ///
 	EquipStatSet buildWeaponStatBlocks(const WeaponSet & wep);
 	void commitWeaponStatBlocks(const EquipStatSet & in, WeaponSet & wep);
 
@@ -40,10 +40,11 @@ public:
 
 	EquipStatSet buildAllStatBlocks(const WeaponSet & wep, const ArmorSet & body, const ArmorSet & helm);
 	void commitAllStatBlocks(const EquipStatSet & in, WeaponSet & wep, ArmorSet & body, ArmorSet & helm);
-	////// StatBlock Handlers //////
+	/// StatBlock Handlers ///
 	
 
-	////// Shuffling Shuffling //////
+	/// Shuffling Shuffling ///
 	void shuffleBlocks(EquipStatSet & in);
 	void shuffleAllBlocks(EquipStatSet & all);
+	/// Shuffling SHuffling ///
 };

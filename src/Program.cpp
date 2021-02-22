@@ -26,6 +26,10 @@ void Program::run()
 		items.getDefaults();
 		items.randStats(randEquipsByType, randEquipsByBlock, equipTrueRandomize);
 	}
+	if (randEnemyLocations)
+	{
+		enemyLocs.getDefaults();
+	}
 }
 
 void Program::get_options(int argc, char** argv)
@@ -36,7 +40,7 @@ void Program::get_options(int argc, char** argv)
 	struct option longOpts[] = { 
 							{ "file", required_argument, nullptr, 'f'},
 							{ "items", no_argument, nullptr, 'i'},
-							//{ "enemies", no_argument, nullptr, 'e'},
+							{ "enemies", no_argument, nullptr, 'e'},
 							{ "equips", optional_argument, nullptr, 'q'},
 							{ "seed", required_argument, nullptr, 's'},
 							{ "help", no_argument, nullptr, 'h'} };
@@ -78,9 +82,16 @@ void Program::get_options(int argc, char** argv)
 					equipTrueRandomize = true;
 			}
 			break;
-		//case ('e'):
-		//	randEnemies = true;
-		//	break;
+		case ('e'):
+			randEnemyLocations = true;
+			if (optarg != NULL)
+			{
+				arg = optarg;
+
+				if (arg.find('a') != std::string::npos)
+					randEnemyLocationsByArea = true;
+			}
+			break;
 		case ('h'):
 			//HELP COMMENT
 			std::cout << "Castlevania Curse of Darkness Randomizer\n\n" <<

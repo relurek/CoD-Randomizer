@@ -7,17 +7,6 @@
 #include "../../h/Equips/EquipStatBlocks.h"
 
 
-////// Basic Functions //////
-void ItemSets::getDefaults()
-{
-	DefaultWeapons def;
-	DefaultArmor arm;
-	wep = def.getDefaultWeaponSet();
-	body = arm.getDefaultArmorSet();
-	helm = arm.getDefaultHelmetSet();
-}
-
-////// Randomization Specifiers //////
 void ItemSets::randWeaponStats(bool byBlock)
 {
 	EquipStatBlockOperations statOp;
@@ -61,7 +50,8 @@ void ItemSets::randAllStats(bool byBlock)
 	statOp.commitAllStatBlocks(blocks, wep, body, helm);
 }
 
-////// Drivers //////
+
+/// Drivers ///
 void ItemSets::randStats(bool byType, bool byBlock, bool trueRandom)
 {
 	if (byType)
@@ -103,4 +93,13 @@ void ItemSets::write(std::fstream & fs)
 	{
 		helm[i].write(fs);
 	}
+}
+
+void ItemSets::getDefaults()
+{
+	DefaultWeapons def;
+	DefaultArmor arm;
+	wep = def.getDefaultWeaponSet();
+	body = arm.getDefaultArmorSet();
+	helm = arm.getDefaultHelmetSet();
 }

@@ -11,7 +11,7 @@ void EnemyEncounter::write(std::fstream fs)
 		fs.write(reinterpret_cast <char*> (&two), 2);
 		fs.write(reinterpret_cast <char*> (&ids[i]), 2);
 	}
-	loc += 16;
+	loc += 16 + (16 * (int)(ids.size() / 5));
 
 	for (EnemyLocation en : locs)
 	{

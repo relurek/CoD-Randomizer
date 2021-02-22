@@ -21,8 +21,8 @@ public:
 	void write(std::fstream & fs);
 
 private:
-	////// Randomization Specifiers //////
-	void randAllStats(bool byBlock);
+	//helpers
 	void randWeaponStats(bool byBlock);
 	void randArmorStats(bool byBlock);
+	void randAllStats(bool byBlock);
 };

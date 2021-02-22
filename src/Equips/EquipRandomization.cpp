@@ -2,6 +2,353 @@
 #include "../../h/Equips/EquipRandomization.h"
 
 
+void nameShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.name;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.name = hold[i];
+	}
+}
+void discShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.disc;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.disc = hold[i];
+	}
+}
+void recipeShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.recipe;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.recipe = hold[i];
+	}
+}
+void valueShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.value;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.value = hold[i];
+	}
+}
+void sellShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.sell;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.sell = hold[i];
+	}
+}
+void strShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.str;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.str = hold[i];
+	}
+}
+void conShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.con;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.con = hold[i];
+	}
+}
+void lukShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.luk;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.luk = hold[i];
+	}
+}
+void atkShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.atk;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.atk = hold[i];
+	}
+}
+void defShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.def;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.def = hold[i];
+	}
+}
+void poisonResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.poisonRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.poisonRes = hold[i];
+	}
+}
+void curseResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.curseRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.curseRes = hold[i];
+	}
+}
+void stoneResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.stoneRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.stoneRes = hold[i];
+	}
+}
+void paralyzeResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.paralyzeRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.paralyzeRes = hold[i];
+	}
+}
+void fireResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.fireRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.fireRes = hold[i];
+	}
+}
+void iceResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.iceRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.iceRes = hold[i];
+	}
+}
+void thunderResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.thunderRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.thunderRes = hold[i];
+	}
+}
+void windResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.windRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.windRes = hold[i];
+	}
+}
+void earthResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.earthRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.earthRes = hold[i];
+	}
+}
+void lightResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.lightRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.lightRes = hold[i];
+	}
+}
+void darkResShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(blocks.size());
+
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		hold[i] = blocks[i].first.darkRes;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		blocks[i].first.darkRes = hold[i];
+	}
+}
+void skillShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(70);
+
+	for (size_t i = 0; i < hold.size(); i++)
+	{
+		hold[i] = blocks[i].second.skill;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < hold.size(); i++)
+	{
+		blocks[i].second.skill = hold[i];
+	}
+}
+void animSpeedShuffle(EquipStatSet & blocks)
+{
+	std::vector<int32_t> hold;
+	hold.resize(70);
+
+	for (size_t i = 0; i < hold.size(); i++)
+	{
+		hold[i] = blocks[i].second.animSpeed;
+	}
+	std::random_shuffle(hold.begin(), hold.end());
+	for (size_t i = 0; i < hold.size(); i++)
+	{
+		blocks[i].second.animSpeed = hold[i];
+	}
+}
+
+
 void EquipRandomization::randomizeWeapons(EquipStatSet & wep)
 {
 	//Name
@@ -146,350 +493,3 @@ void EquipRandomization::randomizeAll(EquipStatSet & all)
 	animSpeedShuffle(all);
 }
 
-
-
-void EquipRandomization::nameShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.name;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.name = hold[i];
-	}
-}
-void EquipRandomization::discShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.disc;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.disc = hold[i];
-	}
-}
-void EquipRandomization::recipeShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.recipe;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.recipe = hold[i];
-	}
-}
-void EquipRandomization::valueShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.value;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.value = hold[i];
-	}
-}
-void EquipRandomization::sellShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.sell;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.sell = hold[i];
-	}
-}
-void EquipRandomization::strShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.str;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.str = hold[i];
-	}
-}
-void EquipRandomization::conShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.con;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.con = hold[i];
-	}
-}
-void EquipRandomization::lukShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.luk;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.luk = hold[i];
-	}
-}
-void EquipRandomization::atkShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.atk;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.atk = hold[i];
-	}
-}
-void EquipRandomization::defShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.def;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.def = hold[i];
-	}
-}
-void EquipRandomization::poisonResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.poisonRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.poisonRes = hold[i];
-	}
-}
-void EquipRandomization::curseResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.curseRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.curseRes = hold[i];
-	}
-}
-void EquipRandomization::stoneResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.stoneRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.stoneRes = hold[i];
-	}
-}
-void EquipRandomization::paralyzeResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.paralyzeRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.paralyzeRes = hold[i];
-	}
-}
-void EquipRandomization::fireResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.fireRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.fireRes = hold[i];
-	}
-}
-void EquipRandomization::iceResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.iceRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.iceRes = hold[i];
-	}
-}
-void EquipRandomization::thunderResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.thunderRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.thunderRes = hold[i];
-	}
-}
-void EquipRandomization::windResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.windRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.windRes = hold[i];
-	}
-}
-void EquipRandomization::earthResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.earthRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.earthRes = hold[i];
-	}
-}
-void EquipRandomization::lightResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.lightRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.lightRes = hold[i];
-	}
-}
-void EquipRandomization::darkResShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(blocks.size());
-
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		hold[i] = blocks[i].first.darkRes;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < blocks.size(); i++)
-	{
-		blocks[i].first.darkRes = hold[i];
-	}
-}
-void EquipRandomization::skillShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(70);
-
-	for (size_t i = 0; i < hold.size(); i++)
-	{
-		hold[i] = blocks[i].second.skill;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < hold.size(); i++)
-	{
-		blocks[i].second.skill = hold[i];
-	}
-}
-void EquipRandomization::animSpeedShuffle(EquipStatSet & blocks)
-{
-	std::vector<int32_t> hold;
-	hold.resize(70);
-
-	for (size_t i = 0; i < hold.size(); i++)
-	{
-		hold[i] = blocks[i].second.animSpeed;
-	}
-	std::random_shuffle(hold.begin(), hold.end());
-	for (size_t i = 0; i < hold.size(); i++)
-	{
-		blocks[i].second.animSpeed = hold[i];
-	}
-}

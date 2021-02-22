@@ -95,10 +95,12 @@ constexpr uint16_t DUKE_MIRAGE_LV75 = 95;
 constexpr uint16_t BLACK_RASETZ_LV40 = 96;
 constexpr uint16_t BLACK_DRAGON_LV40 = 97;
 
-constexpr uint16_t BASILISK_LV23 = 99;
-
+constexpr uint16_t BASILISK_LV23 = 99; 
+constexpr uint16_t UNKNOWN_1 = 100;
 constexpr uint16_t TREVOR_DOPPELGANGER_LV16 = 101;
 constexpr uint16_t TREVOR_DOPPELGANGER_LV40 = 102;
+constexpr uint16_t UNKNOWN_2 = 104;
+constexpr uint16_t ANOTHER_BARRIER = 106;
 
 
 constexpr uint16_t SKELETON_BLAZE_LV0 = 115;
@@ -129,7 +131,7 @@ constexpr uint16_t MERMAN_LV35 = 139;
 constexpr uint16_t FISHMAN_LV35 = 140;
 constexpr uint16_t FISHMAN_LV45 = 141;
 constexpr uint16_t THIEF_LV21 = 142;
-constexpr uint16_t SHIEF_LV32 = 143;
+constexpr uint16_t THIEF_LV32 = 143;
 constexpr uint16_t GILEE_2_LV0 = 144;
 constexpr uint16_t GILEE_LV31 = 145;
 constexpr uint16_t ASSASSIN_ZOMBIE_LV34 = 146;
@@ -226,3 +228,4 @@ constexpr uint16_t NECROMANCER_LV35 = 236;
 constexpr uint16_t NECROMANCER_LV0 = 237;
 
 constexpr uint16_t FIGHT_BARRIER = 239;
+constexpr uint16_t BARRIER_Q = 245;

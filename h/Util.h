@@ -8,7 +8,7 @@ class ItemLocation;
 class EnemyEncounter;
 
 enum Mode { shuffle, rando, null };
-using LocSet = std::vector<ItemLocation>;
+using itemLocSet = std::vector<ItemLocation>;
 using enemyLocSet = std::vector<EnemyEncounter>;
 enum Zone {
 	CAST,		// Abandoned Castle

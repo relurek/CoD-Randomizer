@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Util.h"
+#include "./Enemies/EnemyLists.h"
 #include "./Equips/ItemSets.h"
 #include "./Equips/T_Weapon.h"
 #include "./Items/ItemLocation.h"
@@ -19,9 +20,10 @@ public:
 	void run();
 private:
 	std::fstream file;
-	LocSet locations;
+	itemLocSet locations;
 	ItemSets items;
-	//Mode mode = null;
+	EnemyLocationLists enemyLocs;
+	
 	std::string seed = "";
 	bool randItemLocations = false;
 	bool randItemLocationsByType = false;
@@ -31,6 +33,9 @@ private:
 	bool equipTrueRandomize = false;
 	bool randEquipsByType = false;
 	bool randEquipsByBlock = false;
+
+	bool randEnemyLocations = false;
+	bool randEnemyLocationsByArea = false;
 
 	void get_options(int argc, char** argv);
 

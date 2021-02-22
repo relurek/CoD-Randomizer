@@ -1,9 +1,9 @@
-#include "../../h/DefaultTables/DefaultLocations.h"
+#include "../../h/DefaultTables/DefaultItemLocations.h"
 #include "../../h/IDs/ItemIDs.h"
 
-LocSet DefaultLocations::getDefaultLocationSet()
+itemLocSet DefaultLocations::getDefaultLocationSet()
 {
-	LocSet out;
+	itemLocSet out;
 	//out.reserve() once I have all items and a final count
 
 					// zone, offset, strength, glide, time, circle

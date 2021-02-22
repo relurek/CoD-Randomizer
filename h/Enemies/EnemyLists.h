@@ -1,20 +1,23 @@
 #pragma once
 #include <vector>
 #include "../Util.h"
+#include "EnemyEncounter.h"
 
 
-class EnemyLists
+class EnemyLocationLists
 {
 public:
-	EnemyLists() {}
+	EnemyLocationLists() {}
 
 	void getDefaults();
-private:
+
 	enemyLocSet castSet;
 	enemyLocSet mntnSet;
 	enemyLocSet tmplSet;
 	enemyLocSet mtvaSet;
 	enemyLocSet frstSet;
+	enemyLocSet etntSet;
+	enemyLocSet evmrSet;
 	enemyLocSet cdvaSet;
 	enemyLocSet clckSet;
 	enemyLocSet ruinSet;

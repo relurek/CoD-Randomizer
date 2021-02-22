@@ -5,5 +5,5 @@
 class DefaultLocations
 {
 public:
-	LocSet getDefaultLocationSet();
+	itemLocSet getDefaultLocationSet();
 };

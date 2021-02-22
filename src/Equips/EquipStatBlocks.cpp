@@ -1,6 +1,6 @@
 #include "../../h/Equips/EquipStatBlocks.h"
 
-////// StatBlock Processing //////
+/// StatBlock Processing ///
 EquipStatSet EquipStatBlockOperations::buildWeaponStatBlocks(const WeaponSet & wep)
 {
 	size_t num = wep.size();
@@ -197,10 +197,10 @@ void EquipStatBlockOperations::commitAllStatBlocks(const EquipStatSet & in, Weap
 	commitWeaponStatBlocks(wepSet, wep);
 	commitArmorStatBlocks(armSet, body, helm);
 }
-////// StatBlock Processing //////
+/// StatBlock Processing ///
 
 
-////// Shuffling Shuffling //////
+/// Shuffling Shuffling ///
 void EquipStatBlockOperations::shuffleBlocks(EquipStatSet & in)
 {
 	std::random_shuffle(in.begin(), in.end());
@@ -221,4 +221,4 @@ void EquipStatBlockOperations::shuffleAllBlocks(EquipStatSet & all)
 		all[i].second = wepSet[i].second;
 	}
 }
-////// Shuffling Shuffling //////
+/// Shuffling Shuffling ///
