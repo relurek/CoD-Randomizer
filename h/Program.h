@@ -9,7 +9,8 @@
 #include "./Equips/ItemSets.h"
 #include "./Equips/T_Weapon.h"
 #include "./Items/ItemLocation.h"
-
+#include "./quick_arg_parser.hpp"
+struct Args;
 
 
 
@@ -44,7 +45,7 @@ private:
 	bool randEnemyLocations = false;
 	bool randEnemyLocationsByArea = false;
 
-	void get_options(int argc, char** argv);
+	void get_options(Args & a);
 
 	void write();
 };

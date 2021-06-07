@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cstdint>
+#include <cmath>
 #include "../../h/Enemies/EnemyLocationRandomization.h"
 
 /// Enemy Location Shuffling ///
@@ -47,7 +48,7 @@ void writeIDs(enemyLocSet & in, const std::vector<uint16_t> & ids, const std::ve
 	for (EnemyEncounter & enc : in)
 	{
 		//For all ids per encounter
-		for (uint16_t & val : enc.ids)
+		for (uint16_t & val : enc.getIDs())
 		{
 			//If id corresponds to an enemy
 			if (checkException(val))
@@ -78,7 +79,7 @@ void shuffleAreaLocs(enemyLocSet & in, std::mt19937 & prng)
 	for (EnemyEncounter & enc : in)
 	{
 		//For all ids per encounter
-		for (uint16_t id : enc.ids)
+		for (uint16_t id : enc.getIDs())
 		{
 			//If id corresponds to an enemy
 			if (checkException(id))
@@ -149,57 +150,57 @@ void writeToAllLocs(EnemyLocationLists & in, const enemyLocSet & all)
 	size_t i = 0;
 	for (EnemyEncounter & enc : in.castSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.mntnSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.tmplSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.mtvaSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.frstSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.etntSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.evmrSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.cdvaSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.clckSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.ruinSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 	for (EnemyEncounter & enc : in.dracSet)
 	{
-		enc.ids = all[i].ids;
+		enc.setIDs(all[i].getIDsConst());
 		i++;
 	}
 }
@@ -216,9 +217,9 @@ void shuffleAllLocs(EnemyLocationLists & in, std::mt19937 & prng)
 //Randomize enemy numbers by set
 void randomizeNumbersInSet(enemyLocSet & in, const int low, const int high, std::mt19937 & prng)
 {
-	for (EnemyEncounter enc : in)
+	for (EnemyEncounter & enc : in)
 	{
-		for (EnemyLocation loc : enc.locs)
+		for (EnemyLocation & loc : enc.getLocs())
 		{
 			int r1 = prng() % (high - low + 1) + low;		//random between 50 and 150 (by default)
 			float r2 = (float)r1 / 100;								//random between .5 and 1.5 (by default)

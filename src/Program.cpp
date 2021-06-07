@@ -1,23 +1,37 @@
 #include <ctime>
 #include <functional>
-#include <getopt.h>
+//#include <getopt.h>
 #include <iostream>
 #include <utility>
 #include "../h/Program.h"
 
 
-
+struct Args : MainArguments<Args>
+{
+	using MainArguments<Args>::MainArguments;
+	std::string inputName = Args::argument(0);
+	std::string outputName = option("output", 'o', "Output file. If not specified, randomization occurs in place. Specific name is optional, based on seed if not specified") = "";
+	std::string seed = option("seed", 's', "Randomization seed, if not specified, a random 64 bit integer will be generated") = "";
+	std::string equipFlags = option("equips", 'q') = "";
+	std::string enemyFlags = option("enemies", 'e') = "";
+	std::string itemFlags = option("items", 'i') = "";
+	bool copyOut = option("out", 'o') = false;
+	bool randomizeEquips = option("equips", 'q') = false;
+	bool randomizeEnemies = option("enemies", 'e') = false;
+	bool randomizeItems = option("items", 'i') = false;
+};
 
 Program::Program(int argc, char** argv)
 {
-	get_options(argc, argv);
+	Args args(argc, argv);
+	get_options(args);
 
 	if (seed == "")
 	{
 		std::random_device rd;
 		std::mt19937_64 rng64(rd());
 
-		std::uniform_int_distribution<unsigned long long int> intR(0, std::pow(2,64) - 1);
+		std::uniform_int_distribution<unsigned long long int> intR(0, (uint64_t)std::pow(2,64) - 1);
 
 		seed = std::to_string(intR(rng64));
 	}
@@ -56,101 +70,42 @@ void Program::run(std::mt19937 & prng)
 	}
 }
 
-void Program::get_options(int argc, char** argv)
+void Program::get_options(Args & a)
 {
-	int option_index = 0, option = 0;
-	opterr = 0;
-
-	struct option longOpts[] = { 
-							{ "input", required_argument, nullptr, 'i'},
-							{ "output", optional_argument, nullptr, 'o'},
-							{ "items", no_argument, nullptr, 't'},
-							{ "enemies", optional_argument, nullptr, 'e'},
-							{ "equips", optional_argument, nullptr, 'q'},
-							{ "seed", required_argument, nullptr, 's'},
-							{ "help", no_argument, nullptr, 'h'} };
-
-
-
-	while ((option = getopt_long(argc, argv, "i:o::te::q::s:h", longOpts, &option_index)) != -1)
+	inputName = a.inputName;
+	if (a.copyOut)
 	{
-		std::string arg;
-		switch (option)
-		{
-		case ('i'):
-			arg = optarg;
-			inputName = arg;
-			break;
-		case ('o'):
-			copyImage = true;
-			if (optarg != NULL)
-			{
-				arg = optarg;
-				outputName = arg;
-			}
-			break;
-		case ('s'):
-			arg = optarg;
-			seed = arg;
-			break;
-		//case ('t'):
-		//	arg = optarg;
-		//	randItemLocations = true;
-		//	if (arg.find('a') != std::string::npos)
-		//		randItemLocationsByArea = true;
-		//	if (arg.find('t') != std::string::npos)
-		//		randItemLocationsByType = true;
-		//	break;
-		case ('q'):
-			randEquips = true;
-			if (optarg != NULL)
-			{
-				arg = optarg;
-			
-				if (arg.find('t') != std::string::npos)
-					randEquipsByType = true;
-				if (arg.find('b') != std::string::npos)
-					randEquipsByBlock = true;
-				if (arg.find('r') != std::string::npos)
-					equipTrueRandomize = true;
-			}
-			break;
-		case ('e'):
+		copyImage = true;
+		outputName = a.outputName;
+	}
+	seed = a.seed;
+	if (a.randomizeEquips)
+	{
+		randEquips = true;
+		if (a.equipFlags.find('t') != std::string::npos)
+			randEquipsByType = true;
+		if (a.equipFlags.find('b') != std::string::npos)
+			randEquipsByBlock = true;
+		if (a.equipFlags.find('r') != std::string::npos)
+			equipTrueRandomize = true;
+	}
+	if (a.randomizeEnemies)
+	{
+		if (a.enemyFlags.find('l') != std::string::npos)
 			randEnemyLocations = true;
-			if (optarg != NULL)
-			{
-				arg = optarg;
+		if (a.enemyFlags.find('a') != std::string::npos)
+			randEnemyLocationsByArea = true;
+	}
+	if (a.randomizeItems)
+	{
+		if (a.itemFlags.find('l') != std::string::npos)
+			randItemLocations = true;
+		if (a.itemFlags.find('a') != std::string::npos)
+			randItemLocationsByArea = true;
+	}
 
-				if (arg.find('a') != std::string::npos)
-					randEnemyLocationsByArea = true;
-			}
-			break;
-		case ('h'):
-			//HELP COMMENT
-			std::cout << "Castlevania Curse of Darkness Randomizer\n\n" <<
-				"--input (-i) \"FILE-PATH\"                 = Path to input disc image\n\n" <<
-				"--output (-o) [name] (optional)            = Include to have program create copy of disc image\n" <<
-				"           Include name to force output file name (otherwise set to reflect current seed)\n\n" <<
-				"           WARNING: Including -o will copy your iso, this will drastically increase program runtime, and will cost 4GB every time a new file is generated!" <<
-				"--seed (-s) \"SEED\"                       = Use specific seed (otherwise generating by system time)\n\n" <<
-				"--items (-t) [a,t]                         = Enable item location randomization\n" <<
-				"           a - randomizes item locations according to area they appear in\n" <<
-				"           t - randomizes item locations according to item type\n\n" <<
-				"--equips (-q) [b,r,t]                      = Enables equip stat randomization\n" <<
-				"           b - replaces all of an equips stats with all of another items stats (as opposed to shuffling each stat individually)\n" <<
-				"           t - randomizes equip stats by type (weapons only with other reapons etc.)\n" <<
-				"           r - randomly generates new numbers for equip stats (as opposed to shuffling between equips)\n\n" <<
-				"--help (-h)                                = Displays this help message\n\n";
-			exit(0);
-			break;
-		}
-
-
-	}//while
-
-
-	//ERROR CHECK
-	if (randItemLocations == false && randEquips == false)
+	//error checking
+	if (randItemLocations == false && randEquips == false && randEnemyLocations)
 	{
 		//ERROR - No Randomization Specified
 		std::cerr << "ERROR - No randomization specified\nProgram will terminate\n";
@@ -162,8 +117,24 @@ void Program::get_options(int argc, char** argv)
 		std::cerr << "ERROR - Failed to open input file\nProgram will terminate\n";
 		exit(1);
 	}
-
 }
+
+
+	
+	//			"--input (-i) \"FILE-PATH\"                 = Path to input disc image\n\n" <<
+	//			"--output (-o) [name] (optional)            = Include to have program create copy of disc image\n" <<
+	//			"           Include name to force output file name (otherwise set to reflect current seed)\n\n" <<
+	//			"           WARNING: Including -o will copy your iso, this will drastically increase program runtime, and will cost 4GB every time a new file is generated!" <<
+	//			"--seed (-s) \"SEED\"                       = Use specific seed (otherwise generating by system time)\n\n" <<
+	//			"--items (-t) [a,t]                         = Enable item location randomization\n" <<
+	//			"           a - randomizes item locations according to area they appear in\n" <<
+	//			"           t - randomizes item locations according to item type\n\n" <<
+	//			"--equips (-q) [b,r,t]                      = Enables equip stat randomization\n" <<
+	//			"           b - replaces all of an equips stats with all of another items stats (as opposed to shuffling each stat individually)\n" <<
+	//			"           t - randomizes equip stats by type (weapons only with other reapons etc.)\n" <<
+	//			"           r - randomly generates new numbers for equip stats (as opposed to shuffling between equips)\n\n" <<
+	//			"--help (-h)                                = Displays this help message\n\n";
+
 
 
 
