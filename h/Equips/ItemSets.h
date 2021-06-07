@@ -1,4 +1,5 @@
 #pragma once
+#include <random>
 #include <vector>
 #include "EquipStatBlocks.h"
 #include "../Util.h"
@@ -16,13 +17,7 @@ public:
 	ItemSets() {}
 
 	////// Drivers //////
-	void randStats(bool byType, bool byBlock, bool trueRandom);
-	void getDefaults();
+	void randStats(bool byType, bool byBlock, bool trueRandom, std::mt19937 & prng);
 	void write(std::fstream & fs);
-
-private:
-	//helpers
-	void randWeaponStats(bool byBlock);
-	void randArmorStats(bool byBlock);
-	void randAllStats(bool byBlock);
+	void getDefaults();
 };

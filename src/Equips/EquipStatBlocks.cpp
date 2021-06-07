@@ -1,7 +1,7 @@
 #include "../../h/Equips/EquipStatBlocks.h"
 
 /// StatBlock Processing ///
-EquipStatSet EquipStatBlockOperations::buildWeaponStatBlocks(const WeaponSet & wep)
+EquipStatSet buildWeaponStatBlocks(const WeaponSet & wep)
 {
 	size_t num = wep.size();
 	EquipStatSet blocks;
@@ -35,7 +35,7 @@ EquipStatSet EquipStatBlockOperations::buildWeaponStatBlocks(const WeaponSet & w
 	}
 	return blocks;
 }
-void EquipStatBlockOperations::commitWeaponStatBlocks(const EquipStatSet & in, WeaponSet & wep)
+void commitWeaponStatBlocks(const EquipStatSet & in, WeaponSet & wep)
 {
 	for (size_t i = 0; i < in.size(); i++)
 	{
@@ -65,7 +65,7 @@ void EquipStatBlockOperations::commitWeaponStatBlocks(const EquipStatSet & in, W
 	}
 }
 
-EquipStatSet EquipStatBlockOperations::buildArmorStatBlocks(const ArmorSet & body, const ArmorSet & helm)
+EquipStatSet buildArmorStatBlocks(const ArmorSet & body, const ArmorSet & helm)
 {
 	size_t numB = body.size();
 	size_t numH = helm.size();
@@ -125,7 +125,7 @@ EquipStatSet EquipStatBlockOperations::buildArmorStatBlocks(const ArmorSet & bod
 	} // for
 	return blocks;
 }
-void EquipStatBlockOperations::commitArmorStatBlocks(const EquipStatSet & in, ArmorSet & body, ArmorSet & helm)
+void commitArmorStatBlocks(const EquipStatSet & in, ArmorSet & body, ArmorSet & helm)
 {
 	for (size_t i = 0; i < body.size(); i++)
 	{
@@ -178,7 +178,7 @@ void EquipStatBlockOperations::commitArmorStatBlocks(const EquipStatSet & in, Ar
 	}
 }
 
-EquipStatSet EquipStatBlockOperations::buildAllStatBlocks(const WeaponSet & wep, const ArmorSet & body, const ArmorSet & helm)
+EquipStatSet buildAllStatBlocks(const WeaponSet & wep, const ArmorSet & body, const ArmorSet & helm)
 {
 	EquipStatSet ws = buildWeaponStatBlocks(wep);
 	EquipStatSet as = buildArmorStatBlocks(body, helm);
@@ -186,7 +186,7 @@ EquipStatSet EquipStatBlockOperations::buildAllStatBlocks(const WeaponSet & wep,
 	ws.insert(ws.end(), as.begin(), as.end());
 	return ws;
 }
-void EquipStatBlockOperations::commitAllStatBlocks(const EquipStatSet & in, WeaponSet & wep, ArmorSet & body, ArmorSet & helm)
+void commitAllStatBlocks(const EquipStatSet & in, WeaponSet & wep, ArmorSet & body, ArmorSet & helm)
 {
 	EquipStatSet wepSet(std::make_move_iterator(in.begin()),
 		std::make_move_iterator(in.begin() + wep.size()));
@@ -200,20 +200,55 @@ void EquipStatBlockOperations::commitAllStatBlocks(const EquipStatSet & in, Weap
 /// StatBlock Processing ///
 
 
-/// Shuffling Shuffling ///
-void EquipStatBlockOperations::shuffleBlocks(EquipStatSet & in)
+EquipStatSet EquipStatBlockOperations::generate(const WeaponSet * wep, const ArmorSet * body, const ArmorSet * helm)
 {
-	std::random_shuffle(in.begin(), in.end());
+	EquipStatSet out;
+
+	if (body == nullptr)
+	{
+		out = buildWeaponStatBlocks(*wep);
+	}
+	else if (wep == nullptr)
+	{
+		out = buildArmorStatBlocks(*body, *helm);
+	}
+	else
+	{
+		out = buildAllStatBlocks(*wep, *body, *helm);
+	}
+	return out;
 }
-void EquipStatBlockOperations::shuffleAllBlocks(EquipStatSet & all)
+void EquipStatBlockOperations::commit(const EquipStatSet & in, WeaponSet * wep, ArmorSet * body, ArmorSet * helm)
+{
+	if (body == nullptr)
+	{
+		commitWeaponStatBlocks(in, *wep);
+	}
+	else if (wep == nullptr)
+	{
+		commitArmorStatBlocks(in, *body, *helm);
+	}
+	else
+	{
+		commitAllStatBlocks(in, *wep, *body, *helm);
+	}
+}
+
+
+/// Shuffling Shuffling ///
+void EquipStatBlockOperations::shuffleBlocks(EquipStatSet & in, std::mt19937 & prng)
+{
+	std::shuffle(in.begin(), in.end(), prng);
+}
+void EquipStatBlockOperations::shuffleAllBlocks(EquipStatSet & all, std::mt19937 & prng)
 {
 	//Copy Weapon Specific Set
 	EquipStatSet wepSet(std::make_move_iterator(all.begin()),
 		std::make_move_iterator(all.begin() + all.size()));
-	std::random_shuffle(wepSet.begin(), wepSet.end());
+	std::shuffle(wepSet.begin(), wepSet.end(), prng);
 
 	//Rand All Blocks
-	std::random_shuffle(all.begin(), all.end());
+	std::shuffle(all.begin(), all.end(), prng);
 
 	//Overwrite Weapon Specific Sets
 	for (size_t i = 0; i < wepSet.size(); i++)

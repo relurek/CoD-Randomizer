@@ -2,7 +2,7 @@
 #include "../../h/Equips/EquipRandomization.h"
 
 
-void nameShuffle(EquipStatSet & blocks)
+void nameShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -11,13 +11,13 @@ void nameShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.name;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.name = hold[i];
 	}
 }
-void discShuffle(EquipStatSet & blocks)
+void discShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -26,13 +26,13 @@ void discShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.disc;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.disc = hold[i];
 	}
 }
-void recipeShuffle(EquipStatSet & blocks)
+void recipeShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -41,13 +41,13 @@ void recipeShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.recipe;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.recipe = hold[i];
 	}
 }
-void valueShuffle(EquipStatSet & blocks)
+void valueShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -56,13 +56,13 @@ void valueShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.value;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.value = hold[i];
 	}
 }
-void sellShuffle(EquipStatSet & blocks)
+void sellShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -71,13 +71,13 @@ void sellShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.sell;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.sell = hold[i];
 	}
 }
-void strShuffle(EquipStatSet & blocks)
+void strShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -86,13 +86,13 @@ void strShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.str;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.str = hold[i];
 	}
 }
-void conShuffle(EquipStatSet & blocks)
+void conShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -101,13 +101,13 @@ void conShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.con;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.con = hold[i];
 	}
 }
-void lukShuffle(EquipStatSet & blocks)
+void lukShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -116,13 +116,13 @@ void lukShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.luk;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.luk = hold[i];
 	}
 }
-void atkShuffle(EquipStatSet & blocks)
+void atkShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -131,13 +131,13 @@ void atkShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.atk;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.atk = hold[i];
 	}
 }
-void defShuffle(EquipStatSet & blocks)
+void defShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -146,13 +146,13 @@ void defShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.def;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.def = hold[i];
 	}
 }
-void poisonResShuffle(EquipStatSet & blocks)
+void poisonResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -161,13 +161,13 @@ void poisonResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.poisonRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.poisonRes = hold[i];
 	}
 }
-void curseResShuffle(EquipStatSet & blocks)
+void curseResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -176,13 +176,13 @@ void curseResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.curseRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.curseRes = hold[i];
 	}
 }
-void stoneResShuffle(EquipStatSet & blocks)
+void stoneResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -191,13 +191,13 @@ void stoneResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.stoneRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.stoneRes = hold[i];
 	}
 }
-void paralyzeResShuffle(EquipStatSet & blocks)
+void paralyzeResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -206,13 +206,13 @@ void paralyzeResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.paralyzeRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.paralyzeRes = hold[i];
 	}
 }
-void fireResShuffle(EquipStatSet & blocks)
+void fireResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -221,13 +221,13 @@ void fireResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.fireRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.fireRes = hold[i];
 	}
 }
-void iceResShuffle(EquipStatSet & blocks)
+void iceResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -236,13 +236,13 @@ void iceResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.iceRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.iceRes = hold[i];
 	}
 }
-void thunderResShuffle(EquipStatSet & blocks)
+void thunderResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -251,13 +251,13 @@ void thunderResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.thunderRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.thunderRes = hold[i];
 	}
 }
-void windResShuffle(EquipStatSet & blocks)
+void windResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -266,13 +266,13 @@ void windResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.windRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.windRes = hold[i];
 	}
 }
-void earthResShuffle(EquipStatSet & blocks)
+void earthResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -281,13 +281,13 @@ void earthResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.earthRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.earthRes = hold[i];
 	}
 }
-void lightResShuffle(EquipStatSet & blocks)
+void lightResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -296,13 +296,13 @@ void lightResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.lightRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.lightRes = hold[i];
 	}
 }
-void darkResShuffle(EquipStatSet & blocks)
+void darkResShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(blocks.size());
@@ -311,13 +311,13 @@ void darkResShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].first.darkRes;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		blocks[i].first.darkRes = hold[i];
 	}
 }
-void skillShuffle(EquipStatSet & blocks)
+void skillShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(70);
@@ -326,13 +326,13 @@ void skillShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].second.skill;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < hold.size(); i++)
 	{
 		blocks[i].second.skill = hold[i];
 	}
 }
-void animSpeedShuffle(EquipStatSet & blocks)
+void animSpeedShuffle(EquipStatSet & blocks, std::mt19937 & prng)
 {
 	std::vector<int32_t> hold;
 	hold.resize(70);
@@ -341,7 +341,7 @@ void animSpeedShuffle(EquipStatSet & blocks)
 	{
 		hold[i] = blocks[i].second.animSpeed;
 	}
-	std::random_shuffle(hold.begin(), hold.end());
+	std::shuffle(hold.begin(), hold.end(), prng);
 	for (size_t i = 0; i < hold.size(); i++)
 	{
 		blocks[i].second.animSpeed = hold[i];
@@ -349,147 +349,147 @@ void animSpeedShuffle(EquipStatSet & blocks)
 }
 
 
-void EquipRandomization::randomizeWeapons(EquipStatSet & wep)
+void EquipRandomization::randomizeWeapons(EquipStatSet & wep, std::mt19937 & prng)
 {
 	//Name
-	nameShuffle(wep);
+	nameShuffle(wep, prng);
 	//Discription
-	discShuffle(wep);
+	discShuffle(wep, prng);
 	//Recipe
-	recipeShuffle(wep);
+	recipeShuffle(wep, prng);
 	//Value
-	valueShuffle(wep);
+	valueShuffle(wep, prng);
 	//Sell
-	sellShuffle(wep);
+	sellShuffle(wep, prng);
 	//STR
-	strShuffle(wep);
+	strShuffle(wep, prng);
 	//CON
-	conShuffle(wep);
+	conShuffle(wep, prng);
 	//LUK
-	lukShuffle(wep);
+	lukShuffle(wep, prng);
 	//ATK
-	atkShuffle(wep);
+	atkShuffle(wep, prng);
 	//DEF
-	defShuffle(wep);
+	defShuffle(wep, prng);
 	//POISON
-	poisonResShuffle(wep);
+	poisonResShuffle(wep, prng);
 	//CURSE
-	curseResShuffle(wep);
+	curseResShuffle(wep, prng);
 	//STONE
-	stoneResShuffle(wep);
+	stoneResShuffle(wep, prng);
 	//PARA
-	paralyzeResShuffle(wep);
+	paralyzeResShuffle(wep, prng);
 	//FIRE
-	fireResShuffle(wep);
+	fireResShuffle(wep, prng);
 	//ICE
-	iceResShuffle(wep);
+	iceResShuffle(wep, prng);
 	//THUNDER
-	thunderResShuffle(wep);
+	thunderResShuffle(wep, prng);
 	//WIND
-	windResShuffle(wep);
+	windResShuffle(wep, prng);
 	//EARTH
-	earthResShuffle(wep);
+	earthResShuffle(wep, prng);
 	//LIGHT
-	lightResShuffle(wep);
+	lightResShuffle(wep, prng);
 	//DARK
-	darkResShuffle(wep);
+	darkResShuffle(wep, prng);
 	//SKILL
-	skillShuffle(wep);
+	skillShuffle(wep, prng);
 	//SPEED
-	animSpeedShuffle(wep);
+	animSpeedShuffle(wep, prng);
 }
-void EquipRandomization::randomizeArmor(EquipStatSet & arm)
+void EquipRandomization::randomizeArmor(EquipStatSet & arm, std::mt19937 & prng)
 {
 	//Name
-	nameShuffle(arm);
+	nameShuffle(arm, prng);
 	//Discription
-	discShuffle(arm);
+	discShuffle(arm, prng);
 	//Recipe
-	recipeShuffle(arm);
+	recipeShuffle(arm, prng);
 	//Value
-	valueShuffle(arm);
+	valueShuffle(arm, prng);
 	//Sell
-	sellShuffle(arm);
+	sellShuffle(arm, prng);
 	//STR
-	strShuffle(arm);
+	strShuffle(arm, prng);
 	//CON
-	conShuffle(arm);
+	conShuffle(arm, prng);
 	//LUK
-	lukShuffle(arm);
+	lukShuffle(arm, prng);
 	//ATK
-	atkShuffle(arm);
+	atkShuffle(arm, prng);
 	//DEF
-	defShuffle(arm);
+	defShuffle(arm, prng);
 	//POISON
-	poisonResShuffle(arm);
+	poisonResShuffle(arm, prng);
 	//CURSE
-	curseResShuffle(arm);
+	curseResShuffle(arm, prng);
 	//STONE
-	stoneResShuffle(arm);
+	stoneResShuffle(arm, prng);
 	//PARA
-	paralyzeResShuffle(arm);
+	paralyzeResShuffle(arm, prng);
 	//FIRE
-	fireResShuffle(arm);
+	fireResShuffle(arm, prng);
 	//ICE
-	iceResShuffle(arm);
+	iceResShuffle(arm, prng);
 	//THUNDER
-	thunderResShuffle(arm);
+	thunderResShuffle(arm, prng);
 	//WIND
-	windResShuffle(arm);
+	windResShuffle(arm, prng);
 	//EARTH
-	earthResShuffle(arm);
+	earthResShuffle(arm, prng);
 	//LIGHT
-	lightResShuffle(arm);
+	lightResShuffle(arm, prng);
 	//DARK
-	darkResShuffle(arm);
+	darkResShuffle(arm, prng);
 }
-void EquipRandomization::randomizeAll(EquipStatSet & all)
+void EquipRandomization::randomizeAll(EquipStatSet & all, std::mt19937 & prng)
 {
 	//Name
-	nameShuffle(all);
+	nameShuffle(all, prng);
 	//Discription
-	discShuffle(all);
+	discShuffle(all, prng);
 	//Recipe
-	recipeShuffle(all);
+	recipeShuffle(all, prng);
 	//Value
-	valueShuffle(all);
+	valueShuffle(all, prng);
 	//Sell
-	sellShuffle(all);
+	sellShuffle(all, prng);
 	//STR
-	strShuffle(all);
+	strShuffle(all, prng);
 	//CON
-	conShuffle(all);
+	conShuffle(all, prng);
 	//LUK
-	lukShuffle(all);
+	lukShuffle(all, prng);
 	//ATK
-	atkShuffle(all);
+	atkShuffle(all, prng);
 	//DEF
-	defShuffle(all);
+	defShuffle(all, prng);
 	//POISON
-	poisonResShuffle(all);
+	poisonResShuffle(all, prng);
 	//CURSE
-	curseResShuffle(all);
+	curseResShuffle(all, prng);
 	//STONE
-	stoneResShuffle(all);
+	stoneResShuffle(all, prng);
 	//PARA
-	paralyzeResShuffle(all);
+	paralyzeResShuffle(all, prng);
 	//FIRE
-	fireResShuffle(all);
+	fireResShuffle(all, prng);
 	//ICE
-	iceResShuffle(all);
+	iceResShuffle(all, prng);
 	//THUNDER
-	thunderResShuffle(all);
+	thunderResShuffle(all, prng);
 	//WIND
-	windResShuffle(all);
+	windResShuffle(all, prng);
 	//EARTH
-	earthResShuffle(all);
+	earthResShuffle(all, prng);
 	//LIGHT
-	lightResShuffle(all);
+	lightResShuffle(all, prng);
 	//DARK
-	darkResShuffle(all);
+	darkResShuffle(all, prng);
 	//SKILL
-	skillShuffle(all);
+	skillShuffle(all, prng);
 	//SPEED
-	animSpeedShuffle(all);
+	animSpeedShuffle(all, prng);
 }
 

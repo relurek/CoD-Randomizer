@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <cstdint>
+#include <random>
 #include <vector>
 #include "../Util.h"
 
@@ -31,20 +32,13 @@ using EquipStatSet = std::vector<std::pair<EquipStatBlock, WeaponStatAdds>>;
 class EquipStatBlockOperations
 {
 public:
-	/// StatBlock Handlers ///
-	EquipStatSet buildWeaponStatBlocks(const WeaponSet & wep);
-	void commitWeaponStatBlocks(const EquipStatSet & in, WeaponSet & wep);
+	/// Statblock Handlers ///
+	EquipStatSet generate(const WeaponSet * wep, const ArmorSet * body, const ArmorSet * helm);
+	void commit(const EquipStatSet & in, WeaponSet * wep, ArmorSet * body, ArmorSet * helm);
+	/// Statblock Handlers ///
 
-	EquipStatSet buildArmorStatBlocks(const ArmorSet & body, const ArmorSet & helm);
-	void commitArmorStatBlocks(const EquipStatSet & in, ArmorSet & body, ArmorSet & helm);
-
-	EquipStatSet buildAllStatBlocks(const WeaponSet & wep, const ArmorSet & body, const ArmorSet & helm);
-	void commitAllStatBlocks(const EquipStatSet & in, WeaponSet & wep, ArmorSet & body, ArmorSet & helm);
-	/// StatBlock Handlers ///
-	
-
-	/// Shuffling Shuffling ///
-	void shuffleBlocks(EquipStatSet & in);
-	void shuffleAllBlocks(EquipStatSet & all);
-	/// Shuffling SHuffling ///
+	/// Shuffling Handlers ///
+	void shuffleBlocks(EquipStatSet & in, std::mt19937 & prng);
+	void shuffleAllBlocks(EquipStatSet & all, std::mt19937 & prng);
+	/// Shuffling Handlers ///
 };

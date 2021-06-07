@@ -23,4 +23,6 @@ public:
 	enemyLocSet ruinSet;
 	enemyLocSet inftSet;
 	enemyLocSet dracSet;
+
+	void write(std::fstream & fs);
 };

@@ -31,3 +31,27 @@ uint32_t getBlockOffset(int32_t id)
 	else
 		return CREST_OFFSET;
 }
+
+std::string copyFile(std::string seed, std::string inName, std::string outName)
+{
+	std::string dir;
+
+	fs::create_directory("rando");
+
+	if (outName == "")
+	{
+		dir = "rando/Curse of Darkness - " + seed + ".iso";
+		fs::copy_file(inName, dir);
+	}
+	else
+	{
+		dir = "rando/" + outName + ".iso";
+		fs::copy_file(inName, dir);
+	}
+	return dir;
+}
+
+bool fileExists(std::string file)
+{
+	return fs::exists(file);
+}

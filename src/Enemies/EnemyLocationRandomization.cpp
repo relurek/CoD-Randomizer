@@ -3,68 +3,132 @@
 #include "../../h/Enemies/EnemyLocationRandomization.h"
 
 /// Enemy Location Shuffling ///
+//Check if id should be replaced
+bool checkException(const size_t & id)
+{
+	switch (id)
+	{
+	case(0):
+	case(BATTLE_BARRIER):
+	case(ANOTHER_BARRIER):
+	case(FIGHT_BARRIER):
+	case(BARRIER_Q):
+		return false;
+	default:
+		return true;
+	}
+}
+//Dragons must be randomized separately to prevent clipping issues
+//TODO: research RE: spawn placement (could prevent clipping)
+bool checkDragon(const size_t & id)
+{
+	switch (id)
+	{
+	case(WHITE_DRAGON_LV0):
+	case(WHITE_DRAGON_LV10):
+	case(WHITE_DRAGON_LV38):
+	case(FROST_DRAGON_LV0):
+	case(FROST_DRAGON_LV19):
+	case(FROST_DRAGON_LV39):
+	case(THUNDER_DRAGON_LV0):
+	case(THUNDER_DRAGON_LV20):
+	case(THUNDER_DRAGON_LV40):
+		return true;
+	default:
+		return false;
+	}
+}
 //Writes ids to enemyLocSet in
-void writeIDs(enemyLocSet & in, const std::vector<uint16_t> & ids)
+void writeIDs(enemyLocSet & in, const std::vector<uint16_t> & ids, const std::vector<uint16_t> & idsDrag)
 {
 	size_t i = 0;
-	for (EnemyEncounter enc : in)
+	size_t j = 0;
+	//For all enemy encounters
+	for (EnemyEncounter & enc : in)
 	{
-		for (uint16_t val : enc.ids)
+		//For all ids per encounter
+		for (uint16_t & val : enc.ids)
 		{
-			val = ids[i];
-			i++;
+			//If id corresponds to an enemy
+			if (checkException(val))
+			{
+				if (checkDragon(val))
+				{
+					val = idsDrag[j];
+					j++;
+				}
+				else
+				{
+					val = ids[i];
+					i++;
+				}
+				
+			}
 		}
 	}
 }
 
 //Shuffles enemyLocSet ids
-void shuffleAreaLocs(enemyLocSet & in)
+void shuffleAreaLocs(enemyLocSet & in, std::mt19937 & prng)
 {
 	std::vector<uint16_t> ids;
+	std::vector<uint16_t> idsDrag;
 
-	for (EnemyEncounter enc : in)
+	//For all enemy encounters
+	for (EnemyEncounter & enc : in)
 	{
-		ids.insert(ids.begin(), enc.ids.begin(), enc.ids.end());
+		//For all ids per encounter
+		for (uint16_t id : enc.ids)
+		{
+			//If id corresponds to an enemy
+			if (checkException(id))
+			{
+				if (checkDragon(id))
+					idsDrag.push_back(id);
+				else
+					ids.push_back(id);
+			}
+		}
 	}
 
-	std::random_shuffle(ids.begin(), ids.end());
-	writeIDs(in, ids);
+	std::shuffle(ids.begin(), ids.end(), prng);
+	std::shuffle(idsDrag.begin(), idsDrag.end(), prng);
+	writeIDs(in, ids, idsDrag);
 }
 
 //Shuffles ids by area
-void shuffleLocsByArea(EnemyLocationLists & in)
+void shuffleLocsByArea(EnemyLocationLists & in, std::mt19937 & prng)
 {
 	//cast
-	shuffleAreaLocs(in.castSet);
+	shuffleAreaLocs(in.castSet, prng);
 	//mntn
-	shuffleAreaLocs(in.mntnSet);
+	shuffleAreaLocs(in.mntnSet, prng);
 	//tmpl
-	shuffleAreaLocs(in.tmplSet);
+	shuffleAreaLocs(in.tmplSet, prng);
 	//mtva
-	shuffleAreaLocs(in.mtvaSet);
+	shuffleAreaLocs(in.mtvaSet, prng);
 	//frst
-	shuffleAreaLocs(in.frstSet);
+	shuffleAreaLocs(in.frstSet, prng);
 	//etnt
-	shuffleAreaLocs(in.etntSet);
+	shuffleAreaLocs(in.etntSet, prng);
 	//evmr
-	shuffleAreaLocs(in.evmrSet);
+	shuffleAreaLocs(in.evmrSet, prng);
 	//cdva
-	shuffleAreaLocs(in.cdvaSet);
+	shuffleAreaLocs(in.cdvaSet, prng);
 	//clck
-	shuffleAreaLocs(in.clckSet);
+	shuffleAreaLocs(in.clckSet, prng);
 	//ruin
-	shuffleAreaLocs(in.ruinSet);
+	shuffleAreaLocs(in.ruinSet, prng);
 	//inft
-	shuffleAreaLocs(in.inftSet);
+	shuffleAreaLocs(in.inftSet, prng);
 	//drac
-	shuffleAreaLocs(in.dracSet);
+	shuffleAreaLocs(in.dracSet, prng);
 }
 
 //Shuffles ids regardless of area
-void shuffleAllLocs(EnemyLocationLists & in)
+enemyLocSet compileAll(const EnemyLocationLists & in)
 {
 	enemyLocSet all;
-
 	all.insert(all.end(), in.castSet.begin(), in.castSet.end());
 	all.insert(all.end(), in.mntnSet.begin(), in.mntnSet.end());
 	all.insert(all.end(), in.tmplSet.begin(), in.tmplSet.end());
@@ -78,100 +142,95 @@ void shuffleAllLocs(EnemyLocationLists & in)
 	all.insert(all.end(), in.inftSet.begin(), in.inftSet.end());
 	all.insert(all.end(), in.dracSet.begin(), in.dracSet.end());
 
-	shuffleAreaLocs(all);
-
-	size_t i = 0;
-	for (EnemyEncounter enc : in.castSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.mntnSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.tmplSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.mtvaSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.frstSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.etntSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.evmrSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.cdvaSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.clckSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.ruinSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
-	for (EnemyEncounter enc : in.dracSet)
-	{
-		enc.ids = all[i].ids;
-		i++;
-	}
+	return all;
 }
-
-
-//Shuffles enemy locations
-void EnemyLocationRandomization::shuffleLocations(EnemyLocationLists & in, const bool byArea)
+void writeToAllLocs(EnemyLocationLists & in, const enemyLocSet & all)
 {
-	if (byArea)
+	size_t i = 0;
+	for (EnemyEncounter & enc : in.castSet)
 	{
-		shuffleLocsByArea(in);
+		enc.ids = all[i].ids;
+		i++;
 	}
-	else
+	for (EnemyEncounter & enc : in.mntnSet)
 	{
-		shuffleAllLocs(in);
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.tmplSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.mtvaSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.frstSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.etntSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.evmrSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.cdvaSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.clckSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.ruinSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
+	}
+	for (EnemyEncounter & enc : in.dracSet)
+	{
+		enc.ids = all[i].ids;
+		i++;
 	}
 }
-/// Enemy Location Shuffling ///
+void shuffleAllLocs(EnemyLocationLists & in, std::mt19937 & prng)
+{
+	enemyLocSet all = compileAll(in);
 
+	shuffleAreaLocs(all, prng);
 
-/// Enemy Number Randomization ///
+	writeToAllLocs(in, all);
+}
+
+/// Enemy Number Randomization - TESTING///
 //Randomize enemy numbers by set
-void randomizeNumbersInSet(enemyLocSet & in, const int low, const int high)
+void randomizeNumbersInSet(enemyLocSet & in, const int low, const int high, std::mt19937 & prng)
 {
 	for (EnemyEncounter enc : in)
 	{
 		for (EnemyLocation loc : enc.locs)
 		{
-			int r1 = std::rand() % (high - low + 1) + low;		//random between 50 and 150 (by default)
-			float r2 = r1 / 100;								//random between .5 and 1.5 (by default)
-			loc.spawnNum = std::ceilf(loc.spawnNum * r2);
-			loc.simulNum = std::ceilf(loc.simulNum * r2);		//Sensible to use the same random multiplier for both spawn and simul
+			int r1 = prng() % (high - low + 1) + low;		//random between 50 and 150 (by default)
+			float r2 = (float)r1 / 100;								//random between .5 and 1.5 (by default)
+			loc.spawnNum = (uint16_t)std::ceilf(loc.spawnNum * r2);
+			loc.simulNum = (uint16_t)std::ceilf(loc.simulNum * r2);		//Sensible to use the same random multiplier for both spawn and simul
 		}
 	}
 }
 
 //Shuffles enemy spawn numbers
-void EnemyLocationRandomization::randomizeNumbers(EnemyLocationLists & in)
+//TODO: Move multiplier ranges to config file, or to class def. and collect as input
+void randomizeNumbers(EnemyLocationLists & in, std::mt19937 & prng)
 {
 	///Move these to a config file...///
 	//Random multiplier low end
@@ -180,17 +239,34 @@ void EnemyLocationRandomization::randomizeNumbers(EnemyLocationLists & in)
 	//Random multiplier high end
 	const int high = 150;
 
-	randomizeNumbersInSet(in.castSet, low, high);
-	randomizeNumbersInSet(in.mntnSet, low, high);
-	randomizeNumbersInSet(in.tmplSet, low, high);
-	randomizeNumbersInSet(in.mtvaSet, low, high);
-	randomizeNumbersInSet(in.frstSet, low, high);
-	randomizeNumbersInSet(in.etntSet, low, high);
-	randomizeNumbersInSet(in.evmrSet, low, high);
-	randomizeNumbersInSet(in.cdvaSet, low, high);
-	randomizeNumbersInSet(in.clckSet, low, high);
-	randomizeNumbersInSet(in.ruinSet, low, high);
-	randomizeNumbersInSet(in.inftSet, low, high);
-	randomizeNumbersInSet(in.dracSet, low, high);
+	randomizeNumbersInSet(in.castSet, low, high, prng);
+	randomizeNumbersInSet(in.mntnSet, low, high, prng);
+	randomizeNumbersInSet(in.tmplSet, low, high, prng);
+	randomizeNumbersInSet(in.mtvaSet, low, high, prng);
+	randomizeNumbersInSet(in.frstSet, low, high, prng);
+	randomizeNumbersInSet(in.etntSet, low, high, prng);
+	randomizeNumbersInSet(in.evmrSet, low, high, prng);
+	randomizeNumbersInSet(in.cdvaSet, low, high, prng);
+	randomizeNumbersInSet(in.clckSet, low, high, prng);
+	randomizeNumbersInSet(in.ruinSet, low, high, prng);
+	randomizeNumbersInSet(in.inftSet, low, high, prng);
+	randomizeNumbersInSet(in.dracSet, low, high, prng);
 }
 /// Enemy Number Randomization ///
+
+//Shuffles enemy locations
+void EnemyLocationRandomization::shuffleLocations(EnemyLocationLists & in, const bool byArea, std::mt19937 & prng)
+{
+	if (byArea)
+	{
+		shuffleLocsByArea(in, prng);
+	}
+	else
+	{
+		shuffleAllLocs(in, prng);
+	}
+	randomizeNumbers(in, prng);
+}
+/// Enemy Location Shuffling ///
+
+

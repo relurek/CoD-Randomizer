@@ -1,5 +1,6 @@
 *.vcxproj*
 /Debug/*
 /Release/*
+/rando/*
 *.bin
 *.iso

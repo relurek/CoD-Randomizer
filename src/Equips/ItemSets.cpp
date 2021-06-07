@@ -7,59 +7,59 @@
 #include "../../h/Equips/EquipStatBlocks.h"
 
 
-void ItemSets::randWeaponStats(bool byBlock)
+void randWeaponStats(bool byBlock, WeaponSet * wep, std::mt19937 & prng)
 {
 	EquipStatBlockOperations statOp;
 	EquipRandomization eqOp;
-
-	EquipStatSet blocks = statOp.buildWeaponStatBlocks(wep);
+		
+	EquipStatSet blocks = statOp.generate(wep, nullptr, nullptr);
 
 	if (byBlock)
-		statOp.shuffleBlocks(blocks);
+		statOp.shuffleBlocks(blocks, prng);
 	else
-		eqOp.randomizeWeapons(blocks);
+		eqOp.randomizeWeapons(blocks, prng);
 
-	statOp.commitWeaponStatBlocks(blocks, wep);
+	statOp.commit(blocks, wep, nullptr, nullptr);
 }
-void ItemSets::randArmorStats(bool byBlock)
+void randArmorStats(bool byBlock, ArmorSet * body, ArmorSet * helm, std::mt19937 & prng)
 {
 	EquipStatBlockOperations statOp;
 	EquipRandomization eqOp;
 
-	EquipStatSet armBlocks = statOp.buildArmorStatBlocks(body, helm);
+	EquipStatSet armBlocks = statOp.generate(nullptr, body, helm);
 
 	if (byBlock)
-		statOp.shuffleBlocks(armBlocks);
+		statOp.shuffleBlocks(armBlocks, prng);
 	else
-		eqOp.randomizeArmor(armBlocks);
+		eqOp.randomizeArmor(armBlocks, prng);
 
-	statOp.commitArmorStatBlocks(armBlocks, body, helm);
+	statOp.commit(armBlocks, nullptr, body, helm);
 }
-void ItemSets::randAllStats(bool byBlock)
+void randAllStats(bool byBlock, WeaponSet * wep, ArmorSet * body, ArmorSet * helm, std::mt19937 & prng)
 {
 	EquipStatBlockOperations statOp;
 	EquipRandomization eqOp;
 
-	EquipStatSet blocks = statOp.buildAllStatBlocks(wep, body, helm);
+	EquipStatSet blocks = statOp.generate(wep, body, helm);
 
 	if (byBlock)
-		statOp.shuffleAllBlocks(blocks);
+		statOp.shuffleAllBlocks(blocks, prng);
 	else
-		eqOp.randomizeAll(blocks);
+		eqOp.randomizeAll(blocks, prng);
 
-	statOp.commitAllStatBlocks(blocks, wep, body, helm);
+	statOp.commit(blocks, wep, body, helm);
 }
 
 
 /// Drivers ///
-void ItemSets::randStats(bool byType, bool byBlock, bool trueRandom)
+void ItemSets::randStats(bool byType, bool byBlock, bool trueRandom, std::mt19937 & prng)
 {
 	if (byType)
 	{
 		if (!trueRandom)
 		{
-			randWeaponStats(byBlock);
-			randArmorStats(byBlock);
+			randWeaponStats(byBlock, &wep, prng);
+			randArmorStats(byBlock, &body, &helm, prng);
 		}
 		else
 		{
@@ -70,7 +70,7 @@ void ItemSets::randStats(bool byType, bool byBlock, bool trueRandom)
 	{
 		if (!trueRandom)
 		{
-			randAllStats(byBlock);
+			randAllStats(byBlock, &wep, &body, &helm, prng);
 		}
 		else
 		{

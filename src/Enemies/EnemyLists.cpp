@@ -18,3 +18,27 @@ void EnemyLocationLists::getDefaults()
 	inftSet = locs.getDefaultEnemyLocationSet(INFT);
 	dracSet = locs.getDefaultEnemyLocationSet(DRAC);
 }
+
+void writeLocSet(std::fstream & fs, enemyLocSet & set)
+{
+	for (EnemyEncounter & enc : set)
+	{
+		enc.write(fs);
+	}
+}
+
+void EnemyLocationLists::write(std::fstream & fs)
+{
+	writeLocSet(fs, castSet);
+	writeLocSet(fs, mntnSet);
+	writeLocSet(fs, tmplSet);
+	writeLocSet(fs, mtvaSet);
+	writeLocSet(fs, frstSet);
+	writeLocSet(fs, etntSet);
+	writeLocSet(fs, evmrSet);
+	writeLocSet(fs, cdvaSet);
+	writeLocSet(fs, clckSet);
+	writeLocSet(fs, ruinSet);
+	writeLocSet(fs, inftSet);
+	writeLocSet(fs, dracSet);
+}

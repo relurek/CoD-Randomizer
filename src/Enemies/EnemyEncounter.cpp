@@ -1,8 +1,8 @@
 #include "../../h/Enemies/EnemyEncounter.h"
 
-void EnemyEncounter::write(std::fstream fs)
+void EnemyEncounter::write(std::fstream & fs)
 {
-	uint8_t two = 2;				// Want specific control over length
+	uint16_t two = 2;				// Want specific control over length
 	uint32_t loc = offset;
 
 	fs.seekp(loc);

@@ -13,7 +13,7 @@ constexpr int32_t SPECIAL_OFFSET = -310;
 constexpr int32_t KEYS_OFFSET = -318;
 constexpr int32_t SHARD_OFFSET = -350;
 constexpr int32_t SUB_OFFSET = -364;
-constexpr int32_t CREST_OFFSET = 374;
+constexpr int32_t CREST_OFFSET = -374;
 
 
 //Weapons
