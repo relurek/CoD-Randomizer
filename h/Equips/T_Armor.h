@@ -6,18 +6,7 @@ class T_Armor
 {
 public:
 
-	T_Armor(uint32_t offIn, uint32_t recipeIn,
-		uint32_t nameIn, uint32_t discIn,
-		uint32_t mModelIn, uint32_t paletteIn, uint32_t mIconIn,
-		uint32_t maxIn, uint32_t valueIn, uint32_t sellIn, uint32_t unlockIn,
-		int32_t strIn, int32_t conIn, int32_t lukIn, int32_t atkIn, int32_t defIn,
-		int32_t poisonIn, int32_t curseIn, int32_t stoneIn, int32_t paralyzeIn,
-		int32_t fireIn, int32_t iceIn, int32_t thunderIn, int32_t windIn, int32_t earthIn, int32_t lightIn, int32_t darkIn)
-
-		: offset(offIn), recipeID(recipeIn), nameID(nameIn), discID(discIn), menuModelID(mModelIn), palette(paletteIn), menuIconID(mIconIn),
-		maxNum(maxIn), value(valueIn), sell(sellIn), recipeUnlock(unlockIn), str(strIn), con(conIn), luk(lukIn), atk(atkIn), def(defIn),
-		poisonRes(poisonIn), curseRes(curseIn), stoneRes(stoneIn), paralyzeRes(paralyzeIn),
-		fireRes(fireIn), iceRes(iceIn), thunderRes(thunderIn), windRes(windIn), earthRes(earthIn), lightRes(lightIn), darkRes(darkIn) {} // Ugly, restructure
+	T_Armor(std::fstream & fs, uint32_t offIn);
 
 public:
 	uint32_t offset;
@@ -44,5 +33,6 @@ public:
 
 	void write(std::fstream & fs);
 private:
+	void read(std::fstream & fs);
 	uint64_t tail0 = 0;
 };

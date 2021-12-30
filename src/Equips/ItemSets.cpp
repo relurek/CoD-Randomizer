@@ -95,11 +95,11 @@ void ItemSets::write(std::fstream & fs)
 	}
 }
 
-void ItemSets::getDefaults()
+void ItemSets::getDefaults(std::fstream & fs)
 {
 	DefaultWeapons def;
 	DefaultArmor arm;
-	wep = def.getDefaultWeaponSet();
+	wep = def.getDefaultWeaponSet(fs);
 	body = arm.getDefaultArmorSet();
 	helm = arm.getDefaultHelmetSet();
 }

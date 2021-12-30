@@ -6,5 +6,5 @@
 class DefaultWeapons
 {
 public:
-	WeaponSet getDefaultWeaponSet();
+	WeaponSet getDefaultWeaponSet(std::fstream & fs);
 };

@@ -345,6 +345,8 @@ template <typename Validator, typename SFINAE = void>
 struct ValidatorUser {
 	template <typename Value>
 	static bool useValidator(const Validator& validator, const Value& value) {
+		(void)validator;
+		(void)value;
 		return true;
 	}
 };

@@ -6,6 +6,6 @@
 class DefaultArmor
 {
 public:
-	ArmorSet getDefaultArmorSet();
-	ArmorSet getDefaultHelmetSet();
+	ArmorSet getDefaultArmorSet(std::fstream & fs);
+	ArmorSet getDefaultHelmetSet(std::fstream & fs);
 };

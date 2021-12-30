@@ -17,7 +17,7 @@ CXX         = g++-8
 SOURCES     := $(shell find . -name "*.cpp")
 #SOURCES     := $(filter-out $(TESTSOURCES), $(SOURCES))
 # list of objects usedmake 
-OBJECTS     := $(SOURCES:%.cpp=%.o)
+OBJECTS     := $(SOURCES:./src/%.cpp=./obj/%.o)
 
 # name of the perf data file, only used by the clean target
 PERF_FILE = perf.data*
@@ -25,20 +25,18 @@ PERF_FILE = perf.data*
 #Default Flags (I prefer -std=c++17 but Mac/Xcode/Clang doesn't support)
 CXXFLAGS = -std=c++17 -Wconversion -Wall  -Wextra -pedantic
 
+
 # rule for creating objects
 obj/%.o: src/%.cpp
-	echo $(SOURCES)
-	mkdir -p obj
-	mkdir -p $(objdirs)
-	$(CXX) $(CXXFLAGS) -c $? -o $@
+	@-mkdir -p $(@D)
+	@-$(CXX) $(CXXFLAGS) -c $? -o $@
 
 	
 # make release - will compile "all" with $(CXXFLAGS) and the -O3 flag
 #                also defines NDEBUG so that asserts will not check
 release: CXXFLAGS += -O3 -DNDEBUG
-release: 
-	echo $(SOURCES)
-	$(CXX) $(CXXFLAGS) -c $(OBJECTS) $(LD_LIBS) -o $(EXECUTABLE)
+release: $(OBJECTS)
+	@-$(CXX) $(CXXFLAGS) $(OBJECTS) $(LD_LIBS) -o $(EXECUTABLE)
 
 # make debug - will compile sources with $(CXXFLAGS) and the -g3 flag
 #              also defines DEBUG, so "#ifdef DEBUG /*...*/ #endif" works
@@ -76,10 +74,10 @@ endif
 
 # make clean - remove .o files, executables, tarball
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE) $(EXECUTABLE)_debug $(EXECUTABLE)_profile \
+	@-rm -f $(OBJECTS) $(EXECUTABLE) $(EXECUTABLE)_debug $(EXECUTABLE)_profile \
       $(TESTS) $(PARTIAL_SUBMITFILE) $(FULL_SUBMITFILE) $(PERF_FILE) \
       $(UNGRADED_SUBMITFILE)
-	rm -Rf *.dSYM
+	@-rm -Rf *.dSYM
 
 
 

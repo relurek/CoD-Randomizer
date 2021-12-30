@@ -221,10 +221,10 @@ void randomizeNumbersInSet(enemyLocSet & in, const int low, const int high, std:
 	{
 		for (EnemyLocation & loc : enc.getLocs())
 		{
-			int r1 = prng() % (high - low + 1) + low;		//random between 50 and 150 (by default)
+			int r1 = (int)(prng() % (high - low + 1) + low);		//random between 50 and 150 (by default)
 			float r2 = (float)r1 / 100;								//random between .5 and 1.5 (by default)
-			loc.spawnNum = (uint16_t)std::ceilf(loc.spawnNum * r2);
-			loc.simulNum = (uint16_t)std::ceilf(loc.simulNum * r2);		//Sensible to use the same random multiplier for both spawn and simul
+			loc.spawnNum = (uint16_t)::ceilf(loc.spawnNum * r2);
+			loc.simulNum = (uint16_t)::ceilf(loc.simulNum * r2);		//Sensible to use the same random multiplier for both spawn and simul
 		}
 	}
 }

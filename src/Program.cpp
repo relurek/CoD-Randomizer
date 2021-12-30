@@ -9,6 +9,7 @@
 struct Args : MainArguments<Args>
 {
 	using MainArguments<Args>::MainArguments;
+	bool helpFlag = option("help", 'h') = false;
 	std::string inputName = Args::argument(0);
 	std::string outputName = option("output", 'o', "Output file. If not specified, randomization occurs in place. Specific name is optional, based on seed if not specified") = "";
 	std::string seed = option("seed", 's', "Randomization seed, if not specified, a random 64 bit integer will be generated") = "";
@@ -59,7 +60,7 @@ void Program::run(std::mt19937 & prng)
 {
 	if (randEquips)
 	{
-		items.getDefaults();
+		items.getDefaults(file);
 		items.randStats(randEquipsByType, randEquipsByBlock, equipTrueRandomize, prng);
 	}
 	if (randEnemyLocations)
@@ -72,6 +73,24 @@ void Program::run(std::mt19937 & prng)
 
 void Program::get_options(Args & a)
 {
+	if (a.helpFlag) 
+	{
+		std::cout <<	"--input (-i) \"FILE-PATH\"                 = Path to input disc image\n" << 
+						"			THIS PROGRAM IS MEANT TO BE RUN ON AN UNMODIFIED NTSC CURSE OF DARKNESS ISO! OTHER CONDITIONS UNTESTED!\n" <<
+						"--output (-o) [name] (optional)            = Include to have program create copy of disc image\n" <<
+						"           Include name to force output file name (otherwise set to reflect current seed)\n\n" <<
+						"           WARNING: Including -o will copy your iso, this will drastically increase program runtime, and will cost 4GB every time a new file is generated!" <<
+						"--seed (-s) \"SEED\"                       = Use specific seed (otherwise generating by system time)\n\n" <<
+						"--items (-t) [a,t]                         = Enable item location randomization\n" <<
+						"           a - randomizes item locations according to area they appear in\n" <<
+						"           t - randomizes item locations according to item type\n\n" <<
+						"--equips (-q) [b,r,t]                      = Enables equip stat randomization\n" <<
+						"           b - replaces all of an equip's stats with all of another equip's stats (as opposed to shuffling each stat individually)\n" <<
+						"           t - randomizes equip stats by type (weapons only with other weapons etc.)\n" <<
+						"           r - randomly generates new numbers for equip stats (as opposed to shuffling between equips)\n\n" <<
+						"--help (-h)                                = Displays this help message\n\n";
+		exit(0);
+	}
 	inputName = a.inputName;
 	if (a.copyOut)
 	{

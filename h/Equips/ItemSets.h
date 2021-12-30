@@ -18,5 +18,5 @@ public:
 	////// Drivers //////
 	void randStats(bool byType, bool byBlock, bool trueRandom, std::mt19937 & prng);
 	void write(std::fstream & fs);
-	void getDefaults();
+	void getDefaults(std::fstream & fs);
 };
