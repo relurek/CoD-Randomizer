@@ -65,9 +65,8 @@ void Program::run(std::mt19937 & prng)
 	}
 	if (randEnemyLocations)
 	{
-		EnemyLocationRandomization eRand;
-		enemyLocs.getDefaults();
-		eRand.shuffleLocations(enemyLocs, randEnemyLocationsByArea, prng);
+		enemyLocs.getDefaults(file);
+		EnemyLocationRandomization().shuffleLocations(enemyLocs, randEnemyLocationsByArea, prng);
 	}
 }
 
@@ -81,14 +80,17 @@ void Program::get_options(Args & a)
 						"           Include name to force output file name (otherwise set to reflect current seed)\n\n" <<
 						"           WARNING: Including -o will copy your iso, this will drastically increase program runtime, and will cost 4GB every time a new file is generated!" <<
 						"--seed (-s) \"SEED\"                       = Use specific seed (otherwise generating by system time)\n\n" <<
-						"--items (-t) [a,t]                         = Enable item location randomization\n" <<
+						"--items (-t) [a,t]                         = Enable item randomization features - NOT CURRENTLY IMPLEMENTED\n" <<
 						"           a - randomizes item locations according to area they appear in\n" <<
 						"           t - randomizes item locations according to item type\n\n" <<
 						"--equips (-q) [b,r,t]                      = Enables equip stat randomization\n" <<
 						"           b - replaces all of an equip's stats with all of another equip's stats (as opposed to shuffling each stat individually)\n" <<
 						"           t - randomizes equip stats by type (weapons only with other weapons etc.)\n" <<
 						"           r - randomly generates new numbers for equip stats (as opposed to shuffling between equips)\n\n" <<
-						"--help (-h)                                = Displays this help message\n\n";
+						"--help (-h)                                = Displays this help message\n\n" <<
+						"--enemies (-e) [a,l]                       = Enables enemy randomization features\n" <<
+						"           l - Enable enemy location randomization\n" <<
+						"			|	a - randomizes enemy location by area";
 		exit(0);
 	}
 	inputName = a.inputName;
@@ -114,17 +116,26 @@ void Program::get_options(Args & a)
 			randEnemyLocations = true;
 		if (a.enemyFlags.find('a') != std::string::npos)
 			randEnemyLocationsByArea = true;
+
+		if (randEnemyLocations != true) 
+		{
+			std::cerr << "ERROR - Randomizing enemies (-e) requires additional flags! See --help or -h fore more information!\n";
+			exit(1);
+		}
 	}
 	if (a.randomizeItems)
 	{
+		std::cout << "WARNING - Item location randomization is not implemented yet, the --items / -t options will be ignored!\n";
 		if (a.itemFlags.find('l') != std::string::npos)
 			randItemLocations = true;
 		if (a.itemFlags.find('a') != std::string::npos)
 			randItemLocationsByArea = true;
+
+		
 	}
 
 	//error checking
-	if (randItemLocations == false && randEquips == false && randEnemyLocations)
+	if (randEquips == false && randEnemyLocations)
 	{
 		//ERROR - No Randomization Specified
 		std::cerr << "ERROR - No randomization specified\nProgram will terminate\n";

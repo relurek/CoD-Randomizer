@@ -4,25 +4,25 @@
 #include "EnemyEncounter.h"
 
 
-class EnemyLocationLists
+class EnemyEncounterLists
 {
 public:
-	EnemyLocationLists() {}
+	EnemyEncounterLists() {}
 
-	void getDefaults();
+	void getDefaults(std::fstream & fs);
 
-	enemyLocSet castSet;
-	enemyLocSet mntnSet;
-	enemyLocSet tmplSet;
-	enemyLocSet mtvaSet;
-	enemyLocSet frstSet;
-	enemyLocSet etntSet;
-	enemyLocSet evmrSet;
-	enemyLocSet cdvaSet;
-	enemyLocSet clckSet;
-	enemyLocSet ruinSet;
-	enemyLocSet inftSet;
-	enemyLocSet dracSet;
+	enemyEncounterSet castSet;
+	enemyEncounterSet mntnSet;
+	enemyEncounterSet tmplSet;
+	enemyEncounterSet mtvaSet;
+	enemyEncounterSet frstSet;
+	enemyEncounterSet etntSet;
+	enemyEncounterSet evmrSet;
+	enemyEncounterSet cdvaSet;
+	enemyEncounterSet clckSet;
+	enemyEncounterSet ruinSet;
+	enemyEncounterSet inftSet;
+	enemyEncounterSet dracSet;
 
 	void write(std::fstream & fs);
 };

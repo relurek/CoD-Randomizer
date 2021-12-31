@@ -6,5 +6,5 @@
 class DefaultEnemyLocations
 {
 public:
-	enemyLocSet getDefaultEnemyLocationSet(Zone z);
+	enemyEncounterSet getDefaultEnemyLocationSet(std::fstream & fs, Zone z);
 };

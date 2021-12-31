@@ -3,12 +3,12 @@
 #include <fstream>
 #include <vector>
 #include "EnemyLocation.h"
+#include "../Util.h"
 
 class EnemyEncounter
 {
 public:
-	EnemyEncounter(uint32_t offsetIn, std::vector<uint16_t> idIn, std::vector<EnemyLocation> locIn)
-		: offset(offsetIn), ids(idIn), locs(locIn) {}
+	EnemyEncounter(std::fstream & fs, uint32_t offsetIn, uint32_t numEnemySlots, uint32_t numLocationSlots);
 
 	void write(std::fstream & fs);
 
@@ -19,7 +19,11 @@ public:
 	void setIDs(std::vector<uint16_t> idsIn) { ids = idsIn; }
 	void setLocs(std::vector<EnemyLocation> locIn) { locs = locIn; }
 private:
+	void read(std::fstream & fs);
+
 	uint32_t offset;
+	uint32_t numSlots;
+	uint32_t numLocations;
 	std::vector<uint16_t> ids;
 	std::vector<EnemyLocation> locs;
 };

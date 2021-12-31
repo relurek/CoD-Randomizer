@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <filesystem>
 #include <vector>
+#include "./IDs/EnemyIDs.h"
 #include "./IDs/ItemIDs.h"
 #include "./Equips/T_Armor.h"
 #include "./Equips/T_Weapon.h"
@@ -11,7 +12,7 @@ namespace fs = std::filesystem;
 
 enum Mode { shuffle, rando, null };
 using itemLocSet = std::vector<ItemLocation>;
-using enemyLocSet = std::vector<EnemyEncounter>;
+using enemyEncounterSet = std::vector<EnemyEncounter>;
 enum Zone {
 	CAST,		// Abandoned Castle
 	MNTN,		// Baljhet Mountains
@@ -36,3 +37,7 @@ uint32_t getBlockOffset(int32_t id);
 std::string copyFile(std::string seed, std::string inName, std::string outName);
 
 bool fileExists(std::string file);
+
+
+//Finds gates/barriers etc.
+bool checkException(const size_t & id);

@@ -100,6 +100,6 @@ void ItemSets::getDefaults(std::fstream & fs)
 	DefaultWeapons def;
 	DefaultArmor arm;
 	wep = def.getDefaultWeaponSet(fs);
-	body = arm.getDefaultArmorSet();
-	helm = arm.getDefaultHelmetSet();
+	body = arm.getDefaultArmorSet(fs);
+	helm = arm.getDefaultHelmetSet(fs);
 }

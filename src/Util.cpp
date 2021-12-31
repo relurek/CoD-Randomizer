@@ -55,3 +55,20 @@ bool fileExists(std::string file)
 {
 	return fs::exists(file);
 }
+
+/// Enemy Location Shuffling ///
+//Check if id should be replaced
+bool checkException(const size_t & id)
+{
+	switch (id)
+	{
+	case(0):
+	case(BATTLE_BARRIER):
+	case(ANOTHER_BARRIER):
+	case(FIGHT_BARRIER):
+	case(BARRIER_Q):
+		return false;
+	default:
+		return true;
+	}
+}

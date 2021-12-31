@@ -8,5 +8,5 @@ class EnemyLocationRandomization
 {
 public:
 	//Shuffles enemy locations
-	void shuffleLocations(EnemyLocationLists & in, const bool byArea, std::mt19937 & prng);
+	void shuffleLocations(EnemyEncounterLists & in, const bool byArea, std::mt19937 & prng);
 };

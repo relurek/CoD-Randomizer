@@ -25,7 +25,7 @@ private:
 	std::fstream file;
 	itemLocSet itemLocs;
 	ItemSets items;
-	EnemyLocationLists enemyLocs;
+	EnemyEncounterLists enemyLocs;
 	
 	std::string inputName;
 	std::string outputName = "";

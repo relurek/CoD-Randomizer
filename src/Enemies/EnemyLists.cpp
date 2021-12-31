@@ -1,25 +1,25 @@
 #include "../../h/Enemies/EnemyLists.h"
 #include "../../h/DefaultTables/DefaultEnemyLocations.h"
 
-void EnemyLocationLists::getDefaults()
+void EnemyEncounterLists::getDefaults(std::fstream & fs)
 {
 	DefaultEnemyLocations locs;
 
-	castSet = locs.getDefaultEnemyLocationSet(CAST);
-	mntnSet = locs.getDefaultEnemyLocationSet(MNTN);
-	tmplSet = locs.getDefaultEnemyLocationSet(TMPL);
-	mtvaSet = locs.getDefaultEnemyLocationSet(MTVA);
-	frstSet = locs.getDefaultEnemyLocationSet(FRST);
-	etntSet = locs.getDefaultEnemyLocationSet(ETNT);
-	evmrSet = locs.getDefaultEnemyLocationSet(EVMR);
-	cdvaSet = locs.getDefaultEnemyLocationSet(CDVA);
-	clckSet = locs.getDefaultEnemyLocationSet(CLCK);
-	ruinSet = locs.getDefaultEnemyLocationSet(RUIN);
-	inftSet = locs.getDefaultEnemyLocationSet(INFT);
-	dracSet = locs.getDefaultEnemyLocationSet(DRAC);
+	castSet = locs.getDefaultEnemyLocationSet(fs, CAST);
+	mntnSet = locs.getDefaultEnemyLocationSet(fs, MNTN);
+	tmplSet = locs.getDefaultEnemyLocationSet(fs, TMPL);
+	mtvaSet = locs.getDefaultEnemyLocationSet(fs, MTVA);
+	frstSet = locs.getDefaultEnemyLocationSet(fs, FRST);
+	etntSet = locs.getDefaultEnemyLocationSet(fs, ETNT);
+	evmrSet = locs.getDefaultEnemyLocationSet(fs, EVMR);
+	cdvaSet = locs.getDefaultEnemyLocationSet(fs, CDVA);
+	clckSet = locs.getDefaultEnemyLocationSet(fs, CLCK);
+	ruinSet = locs.getDefaultEnemyLocationSet(fs, RUIN);
+	inftSet = locs.getDefaultEnemyLocationSet(fs, INFT);
+	dracSet = locs.getDefaultEnemyLocationSet(fs, DRAC);
 }
 
-void writeLocSet(std::fstream & fs, enemyLocSet & set)
+void writeLocSet(std::fstream & fs, enemyEncounterSet & set)
 {
 	for (EnemyEncounter & enc : set)
 	{
@@ -27,7 +27,7 @@ void writeLocSet(std::fstream & fs, enemyLocSet & set)
 	}
 }
 
-void EnemyLocationLists::write(std::fstream & fs)
+void EnemyEncounterLists::write(std::fstream & fs)
 {
 	writeLocSet(fs, castSet);
 	writeLocSet(fs, mntnSet);
