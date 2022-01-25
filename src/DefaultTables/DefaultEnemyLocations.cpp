@@ -3,6 +3,7 @@
 #include "../../h/Util.h"
 enemyEncounterSet DefaultEnemyLocations::getDefaultEnemyLocationSet(std::fstream & fs, Zone z)
 {
+	// Which encounters these are can be found by cross referencing the offset (second argument) against the spreadsheet
 	enemyEncounterSet out;
 	switch (z)
 	{
@@ -60,13 +61,13 @@ enemyEncounterSet DefaultEnemyLocations::getDefaultEnemyLocationSet(std::fstream
 		out.emplace_back(fs, 0x2A3E21C0, 4, 5);
 		out.emplace_back(fs, 0x2A3E2520, 4, 2);
 		out.emplace_back(fs, 0x2853CD30, 4, 5);
-		out.emplace_back(fs, 0x287B2660, 4, 6);
+		out.emplace_back(fs, 0x287B21E0, 4, 7);
 		out.emplace_back(fs, 0x287B2660, 4, 6);
 		out.emplace_back(fs, 0x2A1302A0, 4, 3);
 		out.emplace_back(fs, 0x2A1305D0, 4, 2);
-		out.emplace_back(fs, 0x2898CFD0, 4, 1);
+		//out.emplace_back(fs, 0x2898CFD0, 4, 1);
 		//out.emplace_back(fs, 0x2898D190, 4, 2);
-		out.emplace_back(fs, 0x2898D790, 4, 3);
+		//out.emplace_back(fs, 0x2898D790, 4, 3);
 		out.emplace_back(fs, 0x28A7F440, 4, 6);
 		out.emplace_back(fs, 0x28BEF250, 4, 2);
 		out.emplace_back(fs, 0x2A2C6440, 4, 2);

@@ -33,9 +33,7 @@ void EnemyLocation::read(std::fstream & fs, std::vector<uint16_t> ids)
 	fs.read(reinterpret_cast <char*> (&spawnNum), 2);
 	fs.read(reinterpret_cast <char*> (&simulNum), 2);
 
-
-	if (enemyID == 204)
-		printf("Uh oh");
+	
 
 	enemyIndex = 99;
 	for (size_t i = 0; i < ids.size(); i++)
@@ -45,7 +43,4 @@ void EnemyLocation::read(std::fstream & fs, std::vector<uint16_t> ids)
 			enemyIndex = (uint8_t)i;
 		}
 	}
-
-	if (enemyIndex >= ids.size() || enemyIndex == 99)
-		printf("Uh oh");
 }

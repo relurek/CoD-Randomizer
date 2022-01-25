@@ -78,7 +78,8 @@ void Program::get_options(Args & a)
 						"			THIS PROGRAM IS MEANT TO BE RUN ON AN UNMODIFIED NTSC CURSE OF DARKNESS ISO! OTHER CONDITIONS UNTESTED!\n" <<
 						"--output (-o) [name] (optional)            = Include to have program create copy of disc image\n" <<
 						"           Include name to force output file name (otherwise set to reflect current seed)\n\n" <<
-						"           WARNING: Including -o will copy your iso, this will drastically increase program runtime, and will cost 4GB every time a new file is generated!" <<
+						"           WARNING: Including -o will copy your iso, this will drastically increase program runtime, and\n" <<
+						"                    will cost 4GB every time a new file is generated!\n" <<
 						"--seed (-s) \"SEED\"                       = Use specific seed (otherwise generating by system time)\n\n" <<
 						"--items (-t) [a,t]                         = Enable item randomization features - NOT CURRENTLY IMPLEMENTED\n" <<
 						"           a - randomizes item locations according to area they appear in\n" <<
